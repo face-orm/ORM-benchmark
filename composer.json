@@ -1,5 +1,13 @@
 {
     "require": {
-        "devster/ubench": "1.1.*-dev"
+        "face/face": "dev-master",
+        "doctrine/orm": "2.3.x"
+    },
+            
+    "autoload": {
+        "psr-0": {
+            "Benchmark": "./"
+        }
     }
+    
 }
