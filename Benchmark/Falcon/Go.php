@@ -1,25 +1,32 @@
 <?php
 
-namespace Benchmark\Face;
+namespace Benchmark\Falcon;
 
 class Go implements \Benchmark\TestInterface{
     
     
     public function launchSimple($dbInfos,&$memoryUsage, &$time) {
-        $pdo=new \PDO(
-            "mysql:dbname=".$dbInfos["db-name"].";host=".$dbInfos["host"],
-            $dbInfos["username"],
-            $dbInfos["password"]
-        );
-        
+
         $timeBu = microtime(true);
         $memoryBu = memory_get_usage();
         
-        $fq=Models\Tree::faceQueryBuilder();
-        \Face\ORM::execute($fq, $pdo);
+        $di = new \Phalcon\DI();
+        
+        $di->set('db', new \Phalcon\Db\Adapter\Pdo\Mysql(array(
+            "host" => "localhost",
+            "username" => "root",
+            "password" => "root",
+            "dbname" => $dbInfos["db-name"]
+        )));
+        $di->set('modelsManager', new \Phalcon\Mvc\Model\Manager());
+        $di->set('modelsMetadata', new \Phalcon\Mvc\Model\Metadata\Memory());
+       
+        \Benchmark\Falcon\Models\Tree::find();
         
         $memoryUsage = memory_get_usage() - $memoryBu;
         $time        = microtime(true) - $timeBu;
+        
+        
     }
 
 
@@ -31,13 +38,13 @@ class Go implements \Benchmark\TestInterface{
         );
         
         $timeBu = microtime(true);
-        $memoryBu = memory_get_usage();
+        $memoryBu = memory_get_usage(true);
         
         $fq=Models\Tree::faceQueryBuilder();
         $fq->join("lemons");
         \Face\ORM::execute($fq, $pdo);
 
-        $memoryUsage = memory_get_usage() - $memoryBu;
+        $memoryUsage = memory_get_usage(true) - $memoryBu;
         $time        = microtime(true) - $timeBu;
     }
 
@@ -49,7 +56,7 @@ class Go implements \Benchmark\TestInterface{
         );
         
         $timeBu = microtime(true);
-        $memoryBu = memory_get_usage();
+        $memoryBu = memory_get_usage(true);
         
         $fq=Models\Tree::faceQueryBuilder();
         $fq->join("lemons");
@@ -58,7 +65,7 @@ class Go implements \Benchmark\TestInterface{
         
         
         
-        $memoryUsage = memory_get_usage() - $memoryBu;
+        $memoryUsage = memory_get_usage(true) - $memoryBu;
         $time        = microtime(true) - $timeBu;
     }
 

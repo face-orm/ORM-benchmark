@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "0ee50a02ca096660650ef90325d57629",
+    "hash": "66a43e12beb522c5c55b1fe22fd83005",
     "packages": [
         {
             "name": "doctrine/common",
@@ -655,6 +655,34 @@
                 "xunit"
             ],
             "time": "2013-01-13 10:24:48"
+        },
+        {
+            "name": "sneakybobito/phalcon-stubs",
+            "version": "1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/SneakyBobito/phalcon-stubs.git",
+                "reference": "v1.2.0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/SneakyBobito/phalcon-stubs/zipball/v1.2.0",
+                "reference": "v1.2.0",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.9"
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "description": "IDE Stubs for phalconphp",
+            "homepage": "https://github.com/SneakyBobito/phalcon-stubs",
+            "keywords": [
+                "ide",
+                "phalcon",
+                "stubs"
+            ],
+            "time": "2013-07-11 19:20:42"
         },
         {
             "name": "symfony/console",

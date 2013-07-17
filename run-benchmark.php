@@ -1,26 +1,58 @@
 <?php
 
-include 'vendor/autoload.php';
+if(isset($argv[1])){
+    include 'vendor/autoload.php';
 
-$subNameSpace=$argv[1];
+    $subNameSpace=$argv[1];
 
-$className = "Benchmark\\".$subNameSpace."\Go";
+    $className = "Benchmark\\".$subNameSpace."\Go";
 
-$a = new $className();
+    $a = new $className();
 
-$time;
-$memory;
+    $time;
+    $memory;
 
-$a->launch(array(
-        "db-name"   =>"lemon-test",
-        "host"      =>"localhost",
-        "username"  =>"root",
-        "password"  =>"root"
-    ),
-    $memory,
-    $time
-);
+    /* @var $a Benchmark\TestInterface */
 
-$type = $a->type();
+    switch ($argv[2]){
+        case "simple":
+            $a->launchSimple(array(
+                    "db-name"   =>"lemon-test",
+                    "host"      =>"localhost",
+                    "username"  =>"root",
+                    "password"  =>"root"
+                ),
+                $memory,
+                $time
+            );
+            break;
 
-echo sprintf(" %10s |%8s | %11.4f kB  | %10.5f ms  |\n",$subNameSpace,$type,$memory/1000,$time*1000);
+        case "1join":
+            $a->launchOneJoin(array(
+                    "db-name"   =>"lemon-test",
+                    "host"      =>"localhost",
+                    "username"  =>"root",
+                    "password"  =>"root"
+                ),
+                $memory,
+                $time
+            );
+            break;
+        case "2join":
+            $a->launchTwoJoin(array(
+                    "db-name"   =>"lemon-test",
+                    "host"      =>"localhost",
+                    "username"  =>"root",
+                    "password"  =>"root"
+                ),
+                $memory,
+                $time
+            );
+            break;
+    }
+    echo sprintf("| %10s |%8s | %11.4f kB  | %10.5f ms  |\n",$subNameSpace,$argv[2],$memory/1000,$time*1000);
+
+
+
+
+}

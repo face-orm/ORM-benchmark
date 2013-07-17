@@ -1,7 +1,8 @@
 {
     "require": {
         "face/face": "dev-master",
-        "doctrine/orm": "2.3.x"
+        "doctrine/orm": "2.3.x",
+        "sneakybobito/phalcon-stubs": "1.2.0"
     },
             
     "autoload": {

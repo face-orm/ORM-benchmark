@@ -1,5 +1,7 @@
 <?php
 
+namespace Benchmark\Face\Models;
+
 class Seed{
     public $id;
     public $lemon_id;
@@ -58,7 +60,7 @@ class Seed{
                 "fertil"=>[
                 ],
                 "lemon"=>[
-                    "class"     =>  "Lemon",
+                    "class"     =>  "Benchmark\Face\Models\Lemon",
                     "relatedBy" => "seeds",
                     "sql"   =>[
                         "join"  => ["lemon_id"=>"id"]

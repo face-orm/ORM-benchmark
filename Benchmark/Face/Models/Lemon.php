@@ -84,14 +84,14 @@ class Lemon {
                     ]
                 ],
                 "tree"=>[
-                    "class"     =>  "Tree",
+                    "class"     =>  "Benchmark\Face\Models\Tree",
                     "relatedBy" => "lemons",
                     "sql"   =>[
                         "join"  => ["tree_id"=>"id"]
                     ]
                 ],
                 "seeds"=>[
-                    "class"     => "Seed",
+                    "class"     => "Benchmark\Face\Models\Seed",
                     "relation"  => "hasMany",
                     "relatedBy" => "lemon",
                     "sql"   =>[

@@ -8,9 +8,12 @@ namespace Benchmark;
  */
 interface TestInterface {
     
-    public function launch($dbInfo,&$memoryUsage,&$time);
+    public function launchSimple($dbInfo,&$memoryUsage,&$time);
     
-    public function type();
+    public function launchOneJoin($dbInfo,&$memoryUsage,&$time);
+    
+    public function launchTwoJoin($dbInfo,&$memoryUsage,&$time);
+    
     
 }
 

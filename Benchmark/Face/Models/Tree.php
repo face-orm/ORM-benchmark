@@ -65,21 +65,21 @@ class Tree {
                   
                 ],
                 "lemons"=>[
-                    "class"     => "Lemon",
+                    "class"     => "Benchmark\Face\Models\Lemon",
                     "relation"  => "hasMany",
                     "relatedBy" => "tree",
                     "sql"   =>[
                         "join"  => ["id"=>"tree_id"]
                     ]
                 ],
-                "leafs"=>[
-                    "class"     => "Leaf",
-                    "relation"  => "hasMany",
-                    "relatedBy" => "tree",
-                    "sql"   =>[
-                        "join"  => ["id"=>"tree_id"]
-                    ]
-                ]
+//                "leafs"=>[
+//                    "class"     => "Benchmark\Face\Models\Leaf",
+//                    "relation"  => "hasMany",
+//                    "relatedBy" => "tree",
+//                    "sql"   =>[
+//                        "join"  => ["id"=>"tree_id"]
+//                    ]
+//                ]
               
             ]
             
