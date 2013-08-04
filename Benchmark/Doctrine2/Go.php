@@ -3,17 +3,8 @@
 namespace Benchmark\Doctrine2;
 
 class Go implements \Benchmark\TestInterface{
-    
-    
-    public function launchSimple($dbInfos,&$memoryUsage, &$time) {
 
-        $timeBu = microtime(true);
-        $memoryBu = memory_get_usage(true);
-       
-        /*#################################
-                PLACE FOR EXECUTION
-         ##################################*/
-        
+    public function setUp($dbInfos){
         $dbParams = array(
             'driver' => 'pdo_mysql',
             'user' => $dbInfos["username"],
@@ -24,7 +15,21 @@ class Go implements \Benchmark\TestInterface{
         $config = \Doctrine\ORM\Tools\Setup::createAnnotationMetadataConfiguration(array($path), true);
         $entityManager = \Doctrine\ORM\EntityManager::create($dbParams, $config);
 
-        
+        return $entityManager;
+    }
+    
+    public function launchSimple($dbInfos,&$memoryUsage, &$time) {
+
+        $timeBu = microtime(true);
+        $memoryBu = memory_get_usage(true);
+
+        /*#################################
+                PLACE FOR EXECUTION
+         ##################################*/
+
+        $entityManager=$this->setUp($dbInfos);
+
+
         $entityManager->getRepository("Benchmark\Doctrine2\Models\Tree")->findAll();
         
         
@@ -44,16 +49,8 @@ class Go implements \Benchmark\TestInterface{
         /*#################################
                 PLACE FOR EXECUTION
          ##################################*/
-        
-        $dbParams = array(
-            'driver' => 'pdo_mysql',
-            'user' => $dbInfos["username"],
-            'password' =>  $dbInfos["password"],
-            'dbname' => $dbInfos["db-name"]
-        );
-        $path = __DIR__.'/Models';
-        $config = \Doctrine\ORM\Tools\Setup::createAnnotationMetadataConfiguration(array($path), true);
-        $entityManager = \Doctrine\ORM\EntityManager::create($dbParams, $config);
+
+        $entityManager=$this->setUp($dbInfos);
 
         
         $entityManager->getRepository("Benchmark\Doctrine2\Models\Tree")->findAll();
@@ -75,16 +72,8 @@ class Go implements \Benchmark\TestInterface{
         /*#################################
                 PLACE FOR EXECUTION
          ##################################*/
-        
-        $dbParams = array(
-            'driver' => 'pdo_mysql',
-            'user' => $dbInfos["username"],
-            'password' =>  $dbInfos["password"],
-            'dbname' => $dbInfos["db-name"]
-        );
-        $path = __DIR__.'/Models';
-        $config = \Doctrine\ORM\Tools\Setup::createAnnotationMetadataConfiguration(array($path), true);
-        $entityManager = \Doctrine\ORM\EntityManager::create($dbParams, $config);
+
+        $entityManager=$this->setUp($dbInfos);
 
         
         $entityManager->getRepository("Benchmark\Doctrine2\Models\Tree")->findAll();
@@ -98,9 +87,6 @@ class Go implements \Benchmark\TestInterface{
         $time        = microtime(true) - $timeBu;
     }
 
-    public function type() {
-        return "tree";
-    }
 
     
     

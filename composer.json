@@ -2,7 +2,9 @@
     "require": {
         "face/face": "dev-master",
         "doctrine/orm": "2.3.x",
-        "sneakybobito/phalcon-stubs": "1.2.0"
+        "sneakybobito/phalcon-stubs": "1.2.0",
+        "propel/propel1": "~1.6",
+        "j4mie/idiorm": "v1.3.0"
     },
             
     "autoload": {

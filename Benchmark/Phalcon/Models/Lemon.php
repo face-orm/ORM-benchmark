@@ -1,9 +1,9 @@
 <?php
 
-namespace Benchmark\Falcon\Models;
+namespace Benchmark\Phalcon\Models;
 
 
-class Leaf extends \Phalcon\Mvc\Model
+class Lemon extends \Phalcon\Mvc\Model
 {
 
     /**
@@ -16,17 +16,17 @@ class Leaf extends \Phalcon\Mvc\Model
      *
      * @var integer
      */
-    public $length;
+    public $tree_id;
      
     /**
      *
-     * @var integer
+     * @var string
      */
-    public $tree_id;
+    public $mature;
      
     public function getSource()
     {
-        return 'leaf';
+        return 'lemon';
     }
 
 }

@@ -3,7 +3,7 @@
 namespace Benchmark\Face;
 
 class Go implements \Benchmark\TestInterface{
-    
+
     
     public function launchSimple($dbInfos,&$memoryUsage, &$time) {
         $pdo=new \PDO(
@@ -17,7 +17,8 @@ class Go implements \Benchmark\TestInterface{
         
         $fq=Models\Tree::faceQueryBuilder();
         \Face\ORM::execute($fq, $pdo);
-        
+
+
         $memoryUsage = memory_get_usage() - $memoryBu;
         $time        = microtime(true) - $timeBu;
     }
@@ -36,6 +37,7 @@ class Go implements \Benchmark\TestInterface{
         $fq=Models\Tree::faceQueryBuilder();
         $fq->join("lemons");
         \Face\ORM::execute($fq, $pdo);
+
 
         $memoryUsage = memory_get_usage() - $memoryBu;
         $time        = microtime(true) - $timeBu;

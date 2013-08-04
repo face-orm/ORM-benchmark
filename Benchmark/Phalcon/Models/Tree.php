@@ -1,6 +1,6 @@
 <?php
 
-namespace Benchmark\Falcon\Models;
+namespace Benchmark\Phalcon\Models;
 
 
 class Tree extends \Phalcon\Mvc\Model
