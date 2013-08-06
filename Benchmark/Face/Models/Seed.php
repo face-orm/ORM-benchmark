@@ -62,6 +62,7 @@ class Seed{
                 "lemon"=>[
                     "class"     =>  "Benchmark\Face\Models\Lemon",
                     "relatedBy" => "seeds",
+                    "relation"  => "hasOne",
                     "sql"   =>[
                         "join"  => ["lemon_id"=>"id"]
                     ]

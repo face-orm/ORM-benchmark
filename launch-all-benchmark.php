@@ -9,6 +9,7 @@ echo sprintf("| %10s |%8s | %11s     | %10s     |\n","Library  ","TypeTest","Mem
 echo $sepline;
 
 passthru("php run-benchmark.php Face simple");
+exec("php run-benchmark.php Face simple");
 passthru("php run-benchmark.php Face 1join");
 passthru("php run-benchmark.php Face 2join");
 

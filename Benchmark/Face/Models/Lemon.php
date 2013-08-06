@@ -86,6 +86,7 @@ class Lemon {
                 "tree"=>[
                     "class"     =>  "Benchmark\Face\Models\Tree",
                     "relatedBy" => "lemons",
+                    "relation"  => "hasOne",
                     "sql"   =>[
                         "join"  => ["tree_id"=>"id"]
                     ]
