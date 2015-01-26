@@ -20,7 +20,7 @@ if(isset($argv[1])){
                     "db-name"   =>"lemon-test",
                     "host"      =>"localhost",
                     "username"  =>"root",
-                    "password"  =>"root"
+                    "password"  =>""
                 ),
                 $memory,
                 $time
@@ -32,7 +32,7 @@ if(isset($argv[1])){
                     "db-name"   =>"lemon-test",
                     "host"      =>"localhost",
                     "username"  =>"root",
-                    "password"  =>"root"
+                    "password"  =>""
                 ),
                 $memory,
                 $time
@@ -43,7 +43,7 @@ if(isset($argv[1])){
                     "db-name"   =>"lemon-test",
                     "host"      =>"localhost",
                     "username"  =>"root",
-                    "password"  =>"root"
+                    "password"  =>""
                 ),
                 $memory,
                 $time

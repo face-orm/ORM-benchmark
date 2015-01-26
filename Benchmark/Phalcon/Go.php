@@ -10,7 +10,7 @@ class Go implements \Benchmark\TestInterface{
         $di->set('db', new \Phalcon\Db\Adapter\Pdo\Mysql(array(
             "host" => "localhost",
             "username" => "root",
-            "password" => "root",
+            "password" => "",
             "dbname" => $dbInfos["db-name"]
         )));
         $di->set('modelsManager', new \Phalcon\Mvc\Model\Manager());
