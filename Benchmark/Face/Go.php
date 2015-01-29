@@ -4,8 +4,23 @@ namespace Benchmark\Face;
 
 class Go implements \Benchmark\TestInterface{
 
+    public function setup(){
+
+
+        $config = new \Face\Config();
+
+        $facesArray = include( __DIR__ . "/faces-definition.php");
+
+        $config->setFaceLoader(new \Face\Core\FaceLoader\ArrayLoader($facesArray));
+
+        $config::setDefault($config);
+
+    }
     
     public function launchSimple($dbInfos,&$memoryUsage, &$time) {
+
+
+        $this->setup();
 
         $pdo=new \PDO(
             "mysql:dbname=".$dbInfos["db-name"].";host=".$dbInfos["host"],
@@ -27,6 +42,9 @@ class Go implements \Benchmark\TestInterface{
 
 
     public function launchOneJoin($dbInfos, &$memoryUsage, &$time) {
+
+        $this->setup();
+
         $pdo=new \PDO(
             "mysql:dbname=".$dbInfos["db-name"].";host=".$dbInfos["host"],
             $dbInfos["username"],
@@ -46,6 +64,9 @@ class Go implements \Benchmark\TestInterface{
     }
 
     public function launchTwoJoin($dbInfos, &$memoryUsage, &$time) {
+
+        $this->setup();
+
         $pdo=new \PDO(
             "mysql:dbname=".$dbInfos["db-name"].";host=".$dbInfos["host"],
             $dbInfos["username"],
