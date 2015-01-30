@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database name="lemon-test" defaultIdMethod="native">
+    <table name="tree" namespace="Benchmark\Propel\Models" phpName="Tree">
+        <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true"/>
+        <column name="age" type="integer" />
+    </table>
+    <table name="lemon" namespace="Benchmark\Propel\Models" phpName="Lemon">
+        <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true"/>
+        <column name="tree_id" type="integer" />
+        <foreign-key foreignTable="tree">
+            <reference local="tree_id" foreign="id"/>
+        </foreign-key>
+    </table>
+    <table name="seed" namespace="Benchmark\Propel\Models" phpName="Seed">
+        <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
+        <column name="lemon_id" type="integer" />
+        <foreign-key foreignTable="lemon">
+            <reference local="lemon_id" foreign="id"/>
+        </foreign-key>
+    </table>
+</database>

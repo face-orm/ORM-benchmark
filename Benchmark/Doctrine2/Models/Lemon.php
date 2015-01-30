@@ -1,17 +1,21 @@
 <?php
 
-namespace Benchmark\Face\Models;
+namespace Benchmark\Doctrine2\Models;
 
+/** @Entity
+ *  @Table(name="lemon")
+ *  **/
 class Lemon {
-    
-    use \Face\Traits\EntityFaceTrait;
 
+    /** @Id @GeneratedValue @Column(type="integer") **/
     public $id;
+    /** @Column(type="integer") **/
     public $tree_id;
+    /** @Column(type="integer") **/
     public $mature;
- 
+    /** @ManyToOne(targetEntity="Benchmark\Doctrine2\Models\Tree") **/
     public $tree;
-    
+    /** @OneToMany(targetEntity="Benchmark\Doctrine2\Models\Seed", mappedBy="lemon") */
     public $seeds=array();
     
     public function getId() {
@@ -56,55 +60,4 @@ class Lemon {
     }
 
 
-
-
-    public static function __getEntityFace() {
-        return [
-            "sqlTable"=>"lemon",
-            
-            "elements"=>[
-                "id"=>[
-                    "type"=>"value",
-                    "identifier"=>true,
-                    "sql"=>[
-                        "columnName"=> "id",
-                        "isPrimary" => true
-                    ]
-                ],
-                "tree_id"=>[
-                    "type"      => "value",
-                    "sql"=>[
-                        "columnName" => "tree_id"
-                    ]
-                ],
-                "mature"=>[
-                    "type"      => "value",
-                    "sql"=>[
-                        "columnName" => "mature"
-                    ]
-                ],
-                "tree"=>[
-                    "class"     =>  "Tree",
-                    "relatedBy" => "lemons",
-                    "sql"   =>[
-                        "join"  => ["tree_id"=>"id"]
-                    ]
-                ],
-                "seeds"=>[
-                    "class"     => "Seed",
-                    "relation"  => "hasMany",
-                    "relatedBy" => "lemon",
-                    "sql"   =>[
-                        "join"  => ["id"=>"lemon_id"]
-                    ]
-                ]
-              
-            ]
-            
-        ];
-    }
-
-    
-    
-    
 }

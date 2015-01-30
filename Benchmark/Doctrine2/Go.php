@@ -12,7 +12,7 @@ class Go implements \Benchmark\TestInterface{
             'dbname' => $dbInfos["db-name"]
         );
         $path = __DIR__.'/Models';
-        $config = \Doctrine\ORM\Tools\Setup::createAnnotationMetadataConfiguration(array($path), true);
+        $config = \Doctrine\ORM\Tools\Setup::createAnnotationMetadataConfiguration(array($path), false);
         $entityManager = \Doctrine\ORM\EntityManager::create($dbParams, $config);
 
         return $entityManager;
@@ -52,18 +52,21 @@ class Go implements \Benchmark\TestInterface{
 
         $entityManager=$this->setUp($dbInfos);
 
-        
-        $entityManager->getRepository("Benchmark\Doctrine2\Models\Tree")->findAll();
-        
-        
+        $query = $entityManager->createQuery("SELECT t FROM Benchmark\Doctrine2\Models\Tree t JOIN t.lemons");
+
+        $r = $query->getResult();
+
+
+
         /*##                             ##*/
         /*#################################*/
-       
-        
+
+
         $memoryUsage = memory_get_usage(true) - $memoryBu;
         $time        = microtime(true) - $timeBu;
+
     }
-    
+
     public function launchTwoJoin($dbInfos,&$memoryUsage, &$time) {
 
         $timeBu = microtime(true);
@@ -75,8 +78,9 @@ class Go implements \Benchmark\TestInterface{
 
         $entityManager=$this->setUp($dbInfos);
 
-        
-        $entityManager->getRepository("Benchmark\Doctrine2\Models\Tree")->findAll();
+        $query = $entityManager->createQuery("SELECT t FROM Benchmark\Doctrine2\Models\Tree t JOIN t.lemons l JOIN l.seeds");
+
+        $r = $query->getResult();
         
         
         /*##                             ##*/
@@ -85,6 +89,7 @@ class Go implements \Benchmark\TestInterface{
         
         $memoryUsage = memory_get_usage(true) - $memoryBu;
         $time        = microtime(true) - $timeBu;
+
     }
 
 

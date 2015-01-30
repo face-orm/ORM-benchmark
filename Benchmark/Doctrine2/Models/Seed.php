@@ -1,10 +1,19 @@
 <?php
 
+namespace Benchmark\Doctrine2\Models;
+
+/** @Entity
+ *  @Table(name="seed")
+ *  **/
 class Seed{
+    /** @Id @GeneratedValue @Column(type="integer") **/
     public $id;
+    /** @Column(type="integer") **/
     public $lemon_id;
+    /** @Column(type="integer") **/
     public $fertil;
-    
+
+    /** @ManyToOne(targetEntity="Benchmark\Doctrine2\Models\Lemon"), mappedBy="seeds") */
     public $lemon;
     
     public function getId() {
@@ -38,38 +47,5 @@ class Seed{
     public function setLemon($lemon) {
         $this->lemon = $lemon;
     }
-
-
-    use \Face\Traits\EntityFaceTrait;
-
-    public static function __getEntityFace() {
-        return [
-            "sqlTable"=>"seed",
-            
-            "elements"=>[
-                "id"=>[
-                    "identifier"=>true,
-                    "sql"=>[
-                        "isPrimary" => true
-                    ]
-                ],
-                "lemon_id"=>[
-                ],
-                "fertil"=>[
-                ],
-                "lemon"=>[
-                    "class"     =>  "Lemon",
-                    "relatedBy" => "seeds",
-                    "sql"   =>[
-                        "join"  => ["lemon_id"=>"id"]
-                    ]
-                ]
-              
-            ]
-            
-        ];
-    }
-
-
     
 }

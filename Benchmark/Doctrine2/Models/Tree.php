@@ -7,15 +7,14 @@ namespace Benchmark\Doctrine2\Models;
  *  **/
 class Tree {
 
-    use \Face\Traits\EntityFaceTrait;
-    
     /** @Id @GeneratedValue @Column(type="integer") **/
     public $id;
     /** @Column(type="integer") **/
     public $age;
+
+    /** @OneToMany(targetEntity="Benchmark\Doctrine2\Models\Lemon", mappedBy="tree") */
     public $lemons=array();
-    public $leafs=array();
-    
+
     public function getId() {
         return $this->id;
     }
@@ -38,57 +37,7 @@ class Tree {
 
     public function setLemons($lemons) {
         $this->lemons = $lemons;
-        echo "TREE : ".$this->id." SET LEMON : ".$lemons->getId().PHP_EOL;
     }
 
-        
-    
-
-    public function getLeafs() {
-        return $this->leafs;
-    }
-
-    public function setLeafs($leafs) {
-        $this->leafs = $leafs;
-    }
-
-        
-    
-    public static function __getEntityFace() {
-        return [
-            "sqlTable"=>"tree",
-            
-            "elements"=>[
-                "id"=>[
-                    "identifier"=>true,
-                    "sql"=>[
-                        "columnName"=> "id",
-                        "isPrimary" => true
-                    ]
-                ],
-                "age"=>[
-                  
-                ],
-                "lemons"=>[
-                    "class"     => "Lemon",
-                    "relation"  => "hasMany",
-                    "relatedBy" => "tree",
-                    "sql"   =>[
-                        "join"  => ["id"=>"tree_id"]
-                    ]
-                ],
-                "leafs"=>[
-                    "class"     => "Leaf",
-                    "relation"  => "hasMany",
-                    "relatedBy" => "tree",
-                    "sql"   =>[
-                        "join"  => ["id"=>"tree_id"]
-                    ]
-                ]
-              
-            ]
-            
-        ];
-    }
     
 }

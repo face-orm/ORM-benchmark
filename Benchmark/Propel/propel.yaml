@@ -1,0 +1,18 @@
+propel:
+  database:
+      connections:
+          lemon-test:
+              adapter: mysql
+              classname: Propel\Runtime\Connection\ConnectionWrapper
+              dsn: "mysql:host=localhost;dbname=lemon-test"
+              user: root
+              password:
+              attributes:
+  runtime:
+      defaultConnection: lemon-test
+      connections:
+          - lemon-test
+  generator:
+      defaultConnection: lemon-test
+      connections:
+          - lemon-test

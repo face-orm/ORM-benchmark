@@ -3,7 +3,8 @@
         "face/face": "dev-master",
         "doctrine/orm": "2.4.x",
         "sneakybobito/phalcon-stubs": "1.2.0",
-        "j4mie/idiorm": "v1.5.1"
+        "j4mie/idiorm": "v1.5.1",
+        "propel/propel": "2.0.0-alpha4"
     },
             
     "autoload": {

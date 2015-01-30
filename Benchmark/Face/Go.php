@@ -6,6 +6,7 @@ class Go implements \Benchmark\TestInterface{
 
     
     public function launchSimple($dbInfos,&$memoryUsage, &$time) {
+
         $pdo=new \PDO(
             "mysql:dbname=".$dbInfos["db-name"].";host=".$dbInfos["host"],
             $dbInfos["username"],
@@ -21,6 +22,7 @@ class Go implements \Benchmark\TestInterface{
 
         $memoryUsage = memory_get_usage() - $memoryBu;
         $time        = microtime(true) - $timeBu;
+
     }
 
 
