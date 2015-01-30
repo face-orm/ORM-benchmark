@@ -9,9 +9,17 @@ class Go implements \Benchmark\TestInterface{
 
         $config = new \Face\Config();
 
-        $facesArray = include( __DIR__ . "/faces-definition.php");
 
-        $config->setFaceLoader(new \Face\Core\FaceLoader\ArrayLoader($facesArray));
+        $redis = new \Redis();
+        $redis->connect("127.0.0.1");
+        $cache = new \Face\Cache\RedisCache($redis,"obench");
+
+
+        $cacheableLoader = new \Face\Core\FaceLoader\FileReader\PhpArrayReader(  __DIR__ . "/face_definitions" );
+        $cacheableLoader->setCache($cache);
+
+        $config->setFaceLoader($cacheableLoader);
+
 
         $config::setDefault($config);
 
