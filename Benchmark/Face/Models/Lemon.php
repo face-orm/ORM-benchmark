@@ -2,7 +2,7 @@
 
 namespace Benchmark\Face\Models;
 
-class Lemon {
+class Lemon implements \Face\Core\EntityInterface {
     
     use \Face\Traits\EntityFaceTrait;
 
@@ -54,58 +54,4 @@ class Lemon {
     public function setSeeds($seeds) {
         $this->seeds = $seeds;
     }
-
-
-
-
-    public static function __getEntityFace() {
-        return [
-            "sqlTable"=>"lemon",
-            
-            "elements"=>[
-                "id"=>[
-                    "type"=>"value",
-                    "identifier"=>true,
-                    "sql"=>[
-                        "columnName"=> "id",
-                        "isPrimary" => true
-                    ]
-                ],
-                "tree_id"=>[
-                    "type"      => "value",
-                    "sql"=>[
-                        "columnName" => "tree_id"
-                    ]
-                ],
-                "mature"=>[
-                    "type"      => "value",
-                    "sql"=>[
-                        "columnName" => "mature"
-                    ]
-                ],
-                "tree"=>[
-                    "class"     =>  "Benchmark\Face\Models\Tree",
-                    "relatedBy" => "lemons",
-                    "relation"  => "hasOne",
-                    "sql"   =>[
-                        "join"  => ["tree_id"=>"id"]
-                    ]
-                ],
-                "seeds"=>[
-                    "class"     => "Benchmark\Face\Models\Seed",
-                    "relation"  => "hasMany",
-                    "relatedBy" => "lemon",
-                    "sql"   =>[
-                        "join"  => ["id"=>"lemon_id"]
-                    ]
-                ]
-              
-            ]
-            
-        ];
-    }
-
-    
-    
-    
 }

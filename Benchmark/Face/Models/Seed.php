@@ -2,7 +2,7 @@
 
 namespace Benchmark\Face\Models;
 
-class Seed{
+class Seed implements \Face\Core\EntityInterface{
     public $id;
     public $lemon_id;
     public $fertil;
@@ -44,34 +44,6 @@ class Seed{
 
     use \Face\Traits\EntityFaceTrait;
 
-    public static function __getEntityFace() {
-        return [
-            "sqlTable"=>"seed",
-            
-            "elements"=>[
-                "id"=>[
-                    "identifier"=>true,
-                    "sql"=>[
-                        "isPrimary" => true
-                    ]
-                ],
-                "lemon_id"=>[
-                ],
-                "fertil"=>[
-                ],
-                "lemon"=>[
-                    "class"     =>  "Benchmark\Face\Models\Lemon",
-                    "relatedBy" => "seeds",
-                    "relation"  => "hasOne",
-                    "sql"   =>[
-                        "join"  => ["lemon_id"=>"id"]
-                    ]
-                ]
-              
-            ]
-            
-        ];
-    }
 
 
     

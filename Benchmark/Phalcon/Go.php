@@ -8,9 +8,9 @@ class Go implements \Benchmark\TestInterface{
         $di = new \Phalcon\DI();
 
         $di->set('db', new \Phalcon\Db\Adapter\Pdo\Mysql(array(
-            "host" => "localhost",
-            "username" => "root",
-            "password" => "",
+            "host" => $dbInfos["host"],
+            "username" => $dbInfos["username"],
+            "password" => $dbInfos["password"],
             "dbname" => $dbInfos["db-name"]
         )));
         $di->set('modelsManager', new \Phalcon\Mvc\Model\Manager());
@@ -27,7 +27,11 @@ class Go implements \Benchmark\TestInterface{
         
         $this->setup($dbInfos);
        
-        $rows = \Benchmark\Phalcon\Models\Tree::find();
+        $trees = \Benchmark\Phalcon\Models\Tree::find();
+
+        foreach($trees as $t){
+            $t->id;
+        }
         
         $memoryUsage = memory_get_usage() - $memoryBu;
         $time        = microtime(true) - $timeBu;
@@ -44,7 +48,14 @@ class Go implements \Benchmark\TestInterface{
         $manager=$di->get('modelsManager');
 
         $phql  = "SELECT * FROM Benchmark\Phalcon\Models\Tree LEFT JOIN Benchmark\Phalcon\Models\Lemon ON Benchmark\Phalcon\Models\Tree.id = Benchmark\Phalcon\Models\Lemon.tree_id";
-        $rows = $manager->executeQuery($phql);
+        $trees = $manager->executeQuery($phql);
+
+        foreach($trees as $t){
+            foreach ($t->lemons as $lemon) {
+                echo $lemon->id . " ";
+            }
+
+        }
 
         $memoryUsage = memory_get_usage() - $memoryBu;
         $time        = microtime(true) - $timeBu;

@@ -2,7 +2,7 @@
 
 namespace Benchmark\Face\Models;
 
-class Tree {
+class Tree implements \Face\Core\EntityInterface  {
 
     use \Face\Traits\EntityFaceTrait;
     
@@ -48,42 +48,5 @@ class Tree {
     }
 
         
-    
-    public static function __getEntityFace() {
-        return [
-            "sqlTable"=>"tree",
-            
-            "elements"=>[
-                "id"=>[
-                    "identifier"=>true,
-                    "sql"=>[
-                        "columnName"=> "id",
-                        "isPrimary" => true
-                    ]
-                ],
-                "age"=>[
-                  
-                ],
-                "lemons"=>[
-                    "class"     => "Benchmark\Face\Models\Lemon",
-                    "relation"  => "hasMany",
-                    "relatedBy" => "tree",
-                    "sql"   =>[
-                        "join"  => ["id"=>"tree_id"]
-                    ]
-                ],
-//                "leafs"=>[
-//                    "class"     => "Benchmark\Face\Models\Leaf",
-//                    "relation"  => "hasMany",
-//                    "relatedBy" => "tree",
-//                    "sql"   =>[
-//                        "join"  => ["id"=>"tree_id"]
-//                    ]
-//                ]
-              
-            ]
-            
-        ];
-    }
-    
+
 }

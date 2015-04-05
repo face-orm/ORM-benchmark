@@ -20,6 +20,8 @@ class Go implements \Benchmark\TestInterface{
     
     public function launchSimple($dbInfos,&$memoryUsage, &$time) {
 
+        $entityManager=$this->setUp($dbInfos);
+
         $timeBu = microtime(true);
         $memoryBu = memory_get_usage(true);
 
@@ -27,12 +29,18 @@ class Go implements \Benchmark\TestInterface{
                 PLACE FOR EXECUTION
          ##################################*/
 
-        $entityManager=$this->setUp($dbInfos);
 
 
-        $entityManager->getRepository("Benchmark\Doctrine2\Models\Tree")->findAll();
-        
-        
+        $trees = $entityManager->getRepository("Benchmark\Doctrine2\Models\Tree")->findAll();
+
+        foreach($trees as $t){
+
+            $t->getId();
+
+        }
+
+
+
         /*##                             ##*/
         /*#################################*/
        
@@ -43,19 +51,30 @@ class Go implements \Benchmark\TestInterface{
     
     public function launchOneJoin($dbInfos,&$memoryUsage, &$time) {
 
+        $entityManager=$this->setUp($dbInfos);
         $timeBu = microtime(true);
         $memoryBu = memory_get_usage(true);
-       
+
         /*#################################
                 PLACE FOR EXECUTION
          ##################################*/
 
-        $entityManager=$this->setUp($dbInfos);
 
         $query = $entityManager->createQuery("SELECT t FROM Benchmark\Doctrine2\Models\Tree t JOIN t.lemons");
 
-        $r = $query->getResult();
+        $trees = $query->getResult();
 
+        foreach($trees as $t){
+
+            $lemons = $t->getLemons();
+
+            foreach($lemons as $l){
+
+                 $l->getId();
+
+            }
+
+        }
 
 
         /*##                             ##*/
@@ -69,20 +88,37 @@ class Go implements \Benchmark\TestInterface{
 
     public function launchTwoJoin($dbInfos,&$memoryUsage, &$time) {
 
+        $entityManager=$this->setUp($dbInfos);
         $timeBu = microtime(true);
         $memoryBu = memory_get_usage(true);
-       
+
         /*#################################
                 PLACE FOR EXECUTION
          ##################################*/
 
-        $entityManager=$this->setUp($dbInfos);
 
         $query = $entityManager->createQuery("SELECT t FROM Benchmark\Doctrine2\Models\Tree t JOIN t.lemons l JOIN l.seeds");
 
-        $r = $query->getResult();
-        
-        
+        $trees = $query->getResult();
+
+
+        foreach($trees as $t){
+
+            $lemons = $t->getLemons();
+
+            foreach($lemons as $l){
+                $seeds = $l->getSeeds();
+
+                foreach($seeds as $s){
+                    $s->getId();
+                }
+
+            }
+
+        }
+
+
+
         /*##                             ##*/
         /*#################################*/
        

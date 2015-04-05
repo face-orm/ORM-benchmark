@@ -10,13 +10,12 @@ if(isset($argv[1])){
     $a = new $className();
 
 
-    $repeat = 100;
+    $repeat = 1;
 
     $run = function($numberOfTimes,$cb){
 
 
-        $minMem = null;
-        $maxMem = null;
+
 
         $minTime = null;
         $maxTime = null;
@@ -30,7 +29,7 @@ if(isset($argv[1])){
             $time = 0;
 
             $r = call_user_func($cb, array(
-                    "db-name" => "lemon-test",
+                    "db-name" => "lemon-bench",
                     "host" => "localhost",
                     "username" => "root",
                     "password" => ""
@@ -61,7 +60,7 @@ if(isset($argv[1])){
             "minTime" => $minTime*1000,
             "maxTime" => $maxTime*1000,
 
-            "avgMem"  => ($allMem/$numberOfTimes)/1000,
+            "avgMem"  => ($allMem)/1000,
             "avgTime" => ($allTime/$numberOfTimes)*1000
 
         ];

@@ -29,7 +29,7 @@ return
                 ]
             ],
             "tree"=>[
-                "class"     =>  "Benchmark\\Face\\Models\\Tree",
+                "entity"     =>  "tree",
                 "relatedBy" => "lemons",
                 "relation"  => "belongsTo",
                 "sql"   =>[
@@ -37,7 +37,7 @@ return
                 ]
             ],
             "seeds"=>[
-                "class"     => "Benchmark\\Face\\Models\\Seed",
+                "entity"     => "seed",
                 "relation"  => "hasMany",
                 "relatedBy" => "lemon",
                 "sql"   =>[

@@ -12,7 +12,7 @@
     "autoload": {
         "psr-0": {
             "Benchmark": "./",
-		"Face": "../face/lib"
+		    "Face": "../face/lib"
         }
     }
     

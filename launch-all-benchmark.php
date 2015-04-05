@@ -38,14 +38,20 @@ passthru("php run-benchmark.php Propel 2join");
 
 echo $emptyLine;
 echo $sepline;
-echo sprintf("| %-53s                 |\n","Simple ORM");
+echo sprintf("| %-53s                 |\n","Intermediate ORM");
 echo $sepline;
 
 echo $emptyLine;
 
 passthru("php run-benchmark.php Phalcon simple");
-passthru("php run-benchmark.php Phalcon 1join");
-passthru("php run-benchmark.php Phalcon 2join");
+//passthru("php run-benchmark.php Phalcon 1join");
+//passthru("php run-benchmark.php Phalcon 2join");
+
+echo $emptyLine;
+echo $sepline;
+echo sprintf("| %-53s                 |\n","Simple ORM");
+echo $sepline;
+
 
 echo $emptyLine;
 

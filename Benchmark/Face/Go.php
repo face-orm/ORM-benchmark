@@ -16,7 +16,7 @@ class Go implements \Benchmark\TestInterface{
 
 
         $cacheableLoader = new \Face\Core\FaceLoader\FileReader\PhpArrayReader(  __DIR__ . "/face_definitions" );
-        $cacheableLoader->setCache($cache);
+        //$cacheableLoader->setCache($cache);
 
         $config->setFaceLoader($cacheableLoader);
 
@@ -40,7 +40,14 @@ class Go implements \Benchmark\TestInterface{
         $memoryBu = memory_get_usage();
         
         $fq=Models\Tree::faceQueryBuilder();
-        \Face\ORM::execute($fq, $pdo);
+        var_dump(Models\Tree::getEntityFace());
+        $trees = \Face\ORM::execute($fq, $pdo);
+
+        foreach($trees as $t){
+
+            $t->getId();
+
+        }
 
 
         $memoryUsage = memory_get_usage() - $memoryBu;
@@ -64,7 +71,18 @@ class Go implements \Benchmark\TestInterface{
         
         $fq=Models\Tree::faceQueryBuilder();
         $fq->join("lemons");
-        \Face\ORM::execute($fq, $pdo);
+        $trees = \Face\ORM::execute($fq, $pdo);
+
+        foreach($trees as $t){
+
+            $lemons = $t->getLemons();
+
+            foreach($lemons as $l){
+                $l->getId();
+
+            }
+
+        }
 
 
         $memoryUsage = memory_get_usage() - $memoryBu;
@@ -87,8 +105,24 @@ class Go implements \Benchmark\TestInterface{
         $fq=Models\Tree::faceQueryBuilder();
         $fq->join("lemons");
         $fq->join("lemons.seeds");
-        \Face\ORM::execute($fq, $pdo);
-        
+        $trees = \Face\ORM::execute($fq, $pdo);
+
+
+        foreach($trees as $t){
+
+            $lemons = $t->getLemons();
+
+            foreach($lemons as $l){
+                $seeds = $l->getSeeds();
+
+                foreach($seeds as $s){
+                    $s->getId();
+                }
+
+            }
+
+        }
+
         
         
         $memoryUsage = memory_get_usage() - $memoryBu;

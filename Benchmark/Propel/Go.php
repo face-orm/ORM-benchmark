@@ -37,6 +37,7 @@ class Go implements \Benchmark\TestInterface{
 
 
 
+        $this->setUp($dbInfos);
         $timeBu = microtime(true);
         $memoryBu = memory_get_usage(true);
 
@@ -44,10 +45,16 @@ class Go implements \Benchmark\TestInterface{
                 PLACE FOR EXECUTION
          ##################################*/
 
-        $this->setUp($dbInfos);
 
         $q = new TreeQuery();
         $trees = $q->find();
+
+        foreach($trees as $t){
+
+            $t->getId();
+
+
+        }
 
 
         /*##                             ##*/
@@ -62,6 +69,7 @@ class Go implements \Benchmark\TestInterface{
 
 
     public function launchOneJoin($dbInfos, &$memoryUsage, &$time) {
+        $this->setUp($dbInfos);
         $timeBu = microtime(true);
         $memoryBu = memory_get_usage(true);
 
@@ -69,11 +77,21 @@ class Go implements \Benchmark\TestInterface{
                 PLACE FOR EXECUTION
          ##################################*/
 
-        $this->setUp($dbInfos);
 
         $q = new TreeQuery();
-        $q->joinLemon();
+        $q->useLemonQuery();
         $trees = $q->find();
+
+        foreach($trees as $t){
+
+            $lemons = $t->getLemons();
+
+            foreach($lemons as $l){
+                $l->getId();
+
+            }
+
+        }
 
 
 
@@ -86,6 +104,7 @@ class Go implements \Benchmark\TestInterface{
     }
 
     public function launchTwoJoin($dbInfos, &$memoryUsage, &$time) {
+        $this->setUp($dbInfos);
         $timeBu = microtime(true);
         $memoryBu = memory_get_usage(true);
 
@@ -93,13 +112,28 @@ class Go implements \Benchmark\TestInterface{
                 PLACE FOR EXECUTION
          ##################################*/
 
-        $this->setUp($dbInfos);
 
         $q = new TreeQuery();
         $q->joinLemon();
         $q->useLemonQuery()->joinSeed();
 
         $trees = $q->find();
+
+        foreach($trees as $t){
+
+            $lemons = $t->getLemons();
+
+            foreach($lemons as $l){
+                $seeds = $l->getSeeds();
+
+                foreach($seeds as $s){
+                    $s->getId();
+                }
+
+            }
+
+        }
+
 
 
 

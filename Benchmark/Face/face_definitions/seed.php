@@ -17,7 +17,7 @@ return [
         "fertil"=>[
         ],
         "lemon"=>[
-            "class"     =>  "Benchmark\\Face\\Models\\Lemon",
+            "entity"     =>  "lemon",
             "relatedBy" => "seeds",
             "relation"  => "belongsTo",
             "sql"   =>[

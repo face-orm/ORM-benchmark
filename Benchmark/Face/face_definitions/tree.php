@@ -16,7 +16,7 @@ return [
         ],
         "age",
         "lemons"=>[
-            "class"     => "Benchmark\\Face\\Models\\Lemon",
+            "entity"     => "lemon",
             "relation"  => "hasMany",
             "relatedBy" => "tree",
             "sql"   =>[
@@ -25,7 +25,7 @@ return [
         ],
 
         "childrenTrees"=>[
-            "class"     => "Benchmark\\Face\\Models\\Tree",
+            "entity"     => "tree",
             "relation"  => "hasManyThrough",
             "relatedBy" => "parentTrees",
             "sql"   =>[
@@ -35,7 +35,7 @@ return [
         ],
 
         "parentTrees"=>[
-            "class"     => "Benchmark\\Face\\Models\\Tree",
+            "entity"     => "tree",
             "relation"  => "hasManyThrough",
             "relatedBy" => "childrenTrees",
             "sql"   =>[
