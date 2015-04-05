@@ -40,7 +40,6 @@ class Go implements \Benchmark\TestInterface{
         $memoryBu = memory_get_usage();
         
         $fq=Models\Tree::faceQueryBuilder();
-        var_dump(Models\Tree::getEntityFace());
         $trees = \Face\ORM::execute($fq, $pdo);
 
         foreach($trees as $t){

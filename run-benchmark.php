@@ -10,7 +10,7 @@ if(isset($argv[1])){
     $a = new $className();
 
 
-    $repeat = 1;
+    $repeat = 50;
 
     $run = function($numberOfTimes,$cb){
 
