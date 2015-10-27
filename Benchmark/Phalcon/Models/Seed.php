@@ -23,7 +23,11 @@ class Seed extends \Phalcon\Mvc\Model
      * @var string
      */
     public $fertil;
-     
+
+    public function initialize(){
+        $this->belongsTo("lemon_id", "Benchmark\Phalcon\Models\Lemon", "id");
+    }
+
     public function getSource()
     {
         return 'seed';

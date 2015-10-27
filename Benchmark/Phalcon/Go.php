@@ -13,14 +13,14 @@ class Go implements \Benchmark\TestInterface{
     public function __construct($dbInfos){
         $di = new \Phalcon\DI();
 
-        $di->set('db', new \Phalcon\Db\Adapter\Pdo\Mysql(array(
+        $di->setShared('db', new \Phalcon\Db\Adapter\Pdo\Mysql(array(
             "host" => $dbInfos["host"],
             "username" => $dbInfos["username"],
             "password" => $dbInfos["password"],
             "dbname" => $dbInfos["db-name"]
         )));
-        $di->set('modelsManager', new \Phalcon\Mvc\Model\Manager());
-        $di->set('modelsMetadata', new \Phalcon\Mvc\Model\Metadata\Memory());
+        $di->setShared('modelsManager', new \Phalcon\Mvc\Model\Manager());
+        $di->setShared('modelsMetadata', new \Phalcon\Mvc\Model\Metadata\Memory());
 
         $this->di = $di;
 
@@ -43,10 +43,9 @@ class Go implements \Benchmark\TestInterface{
         $trees = $manager->executeQuery($phql);
 
         foreach($trees as $t){
-            foreach ($t->lemons as $lemon) {
-                echo $lemon->id . " ";
+            foreach($t["benchmark\Phalcon\Models\Tree"]->lemons as $lemon){
+                $lemon->id;
             }
-
         }
 
     }
@@ -59,7 +58,13 @@ class Go implements \Benchmark\TestInterface{
         $phql  = "SELECT * FROM Benchmark\Phalcon\Models\Tree
             LEFT JOIN Benchmark\Phalcon\Models\Lemon ON Benchmark\Phalcon\Models\Tree.id = Benchmark\Phalcon\Models\Lemon.tree_id
             LEFT JOIN Benchmark\Phalcon\Models\Seed ON Benchmark\Phalcon\Models\Lemon.id = Benchmark\Phalcon\Models\Seed.lemon_id";
-        $rows = $manager->executeQuery($phql);
+        $trees = $manager->executeQuery($phql);
+
+        foreach($trees as $t){
+            foreach($t["benchmark\Phalcon\Models\Tree"]->lemons as $lemon){
+                $lemon->id;
+            }
+        }
 
     }
 

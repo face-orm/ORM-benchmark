@@ -29,4 +29,8 @@ class Leaf extends \Phalcon\Mvc\Model
         return 'leaf';
     }
 
+    public function initialize(){
+        $this->belongsTo("tree_id", "Benchmark\Phalcon\Models\Tree", "id");
+    }
+
 }

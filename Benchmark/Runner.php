@@ -37,16 +37,16 @@ class Runner {
             "1 join" => function($testInstance){
                 $testInstance->launchOneJoin();
             },
-//
-//            "2 joins" => function($testInstance){
-//                $testInstance->launchTwoJoin();
-//            }
+
+            "2 joins" => function($testInstance){
+                $testInstance->launchTwoJoin();
+            }
 
         ];
 
         foreach($testers as $testName => $t) {
             $benchmark = new Benchmark();
-            $benchmark->setCount(1);
+            $benchmark->setCount(10);
 
             foreach ($this->test as $test) {
 

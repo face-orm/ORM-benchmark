@@ -28,9 +28,7 @@ class Go implements \Benchmark\TestInterface{
 
         $config->setFaceLoader($cacheableLoader);
 
-
         $config::setDefault($config);
-
 
         $this->pdo = new \PDO(
             "mysql:dbname=".$dbInfos["db-name"].";host=".$dbInfos["host"],
@@ -42,7 +40,6 @@ class Go implements \Benchmark\TestInterface{
     
     public function launchSimple() {
         $pdo = $this->pdo;
-
 
         $fq=Models\Tree::faceQueryBuilder();
         $trees = \Face\ORM::execute($fq, $pdo);
@@ -62,14 +59,10 @@ class Go implements \Benchmark\TestInterface{
         $trees = \Face\ORM::execute($fq, $pdo);
 
         foreach($trees as $t){
-
             $lemons = $t->getLemons();
-
             foreach($lemons as $l){
                 $l->getId();
-
             }
-
         }
 
     }
@@ -89,14 +82,11 @@ class Go implements \Benchmark\TestInterface{
         foreach($trees as $t){
 
             $lemons = $t->getLemons();
-
             foreach($lemons as $l){
                 $seeds = $l->getSeeds();
-
                 foreach($seeds as $s){
                     $s->getId();
                 }
-
             }
 
         }
