@@ -4,9 +4,17 @@ namespace Benchmark\Face;
 
 class Go implements \Benchmark\TestInterface{
 
-    public function setup(){
 
+    /**
+     * @var \PDO
+     */
+    protected $pdo;
 
+    public function getName(){
+        return "FACE";
+    }
+
+    public function __construct($dbInfos){
         $config = new \Face\Config();
 
 
@@ -23,50 +31,31 @@ class Go implements \Benchmark\TestInterface{
 
         $config::setDefault($config);
 
-    }
-    
-    public function launchSimple($dbInfos,&$memoryUsage, &$time) {
 
-
-        $this->setup();
-
-        $pdo=new \PDO(
+        $this->pdo = new \PDO(
             "mysql:dbname=".$dbInfos["db-name"].";host=".$dbInfos["host"],
             $dbInfos["username"],
             $dbInfos["password"]
         );
-        
-        $timeBu = microtime(true);
-        $memoryBu = memory_get_usage();
-        
+    }
+
+    
+    public function launchSimple() {
+        $pdo = $this->pdo;
+
+
         $fq=Models\Tree::faceQueryBuilder();
         $trees = \Face\ORM::execute($fq, $pdo);
 
         foreach($trees as $t){
-
             $t->getId();
-
         }
-
-
-        $memoryUsage = memory_get_usage() - $memoryBu;
-        $time        = microtime(true) - $timeBu;
-
     }
 
 
-    public function launchOneJoin($dbInfos, &$memoryUsage, &$time) {
+    public function launchOneJoin() {
 
-        $this->setup();
-
-        $pdo=new \PDO(
-            "mysql:dbname=".$dbInfos["db-name"].";host=".$dbInfos["host"],
-            $dbInfos["username"],
-            $dbInfos["password"]
-        );
-        
-        $timeBu = microtime(true);
-        $memoryBu = memory_get_usage();
+        $pdo= $this->pdo;
         
         $fq=Models\Tree::faceQueryBuilder();
         $fq->join("lemons");
@@ -83,23 +72,13 @@ class Go implements \Benchmark\TestInterface{
 
         }
 
-
-        $memoryUsage = memory_get_usage() - $memoryBu;
-        $time        = microtime(true) - $timeBu;
     }
 
-    public function launchTwoJoin($dbInfos, &$memoryUsage, &$time) {
+    public function launchTwoJoin() {
 
-        $this->setup();
 
-        $pdo=new \PDO(
-            "mysql:dbname=".$dbInfos["db-name"].";host=".$dbInfos["host"],
-            $dbInfos["username"],
-            $dbInfos["password"]
-        );
-        
-        $timeBu = microtime(true);
-        $memoryBu = memory_get_usage();
+        $pdo= $this->pdo;
+
         
         $fq=Models\Tree::faceQueryBuilder();
         $fq->join("lemons");
@@ -122,10 +101,7 @@ class Go implements \Benchmark\TestInterface{
 
         }
 
-        
-        
-        $memoryUsage = memory_get_usage() - $memoryBu;
-        $time        = microtime(true) - $timeBu;
+
     }
 
 

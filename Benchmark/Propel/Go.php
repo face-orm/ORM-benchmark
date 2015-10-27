@@ -15,7 +15,7 @@ use Symfony\Component\Yaml\Yaml;
 
 class Go implements \Benchmark\TestInterface{
 
-    public function setUp($dbInfos){
+    public function __construct($dbInfos){
 
         $serviceContainer = \Propel\Runtime\Propel::getServiceContainer();
         $serviceContainer->setAdapterClass('lemon-test', 'mysql');
@@ -32,52 +32,22 @@ class Go implements \Benchmark\TestInterface{
 
     }
 
-
-    public function launchSimple($dbInfos,&$memoryUsage, &$time) {
-
-
-
-        $this->setUp($dbInfos);
-        $timeBu = microtime(true);
-        $memoryBu = memory_get_usage(true);
-
-        /*#################################
-                PLACE FOR EXECUTION
-         ##################################*/
+    public function getName(){
+        return "PROPEL";
+    }
 
 
+    public function launchSimple() {
         $q = new TreeQuery();
         $trees = $q->find();
 
         foreach($trees as $t){
-
             $t->getId();
-
-
         }
-
-
-        /*##                             ##*/
-        /*#################################*/
-
-
-        $memoryUsage = memory_get_usage(true) - $memoryBu;
-        $time        = microtime(true) - $timeBu;
-
-
     }
 
 
-    public function launchOneJoin($dbInfos, &$memoryUsage, &$time) {
-        $this->setUp($dbInfos);
-        $timeBu = microtime(true);
-        $memoryBu = memory_get_usage(true);
-
-        /*#################################
-                PLACE FOR EXECUTION
-         ##################################*/
-
-
+    public function launchOneJoin() {
         $q = new TreeQuery();
         $q->useLemonQuery();
         $trees = $q->find();
@@ -92,27 +62,9 @@ class Go implements \Benchmark\TestInterface{
             }
 
         }
-
-
-
-        /*##                             ##*/
-        /*#################################*/
-
-
-        $memoryUsage = memory_get_usage(true) - $memoryBu;
-        $time        = microtime(true) - $timeBu;
     }
 
-    public function launchTwoJoin($dbInfos, &$memoryUsage, &$time) {
-        $this->setUp($dbInfos);
-        $timeBu = microtime(true);
-        $memoryBu = memory_get_usage(true);
-
-        /*#################################
-                PLACE FOR EXECUTION
-         ##################################*/
-
-
+    public function launchTwoJoin() {
         $q = new TreeQuery();
         $q->joinLemon();
         $q->useLemonQuery()->joinSeed();
@@ -120,32 +72,13 @@ class Go implements \Benchmark\TestInterface{
         $trees = $q->find();
 
         foreach($trees as $t){
-
             $lemons = $t->getLemons();
-
             foreach($lemons as $l){
                 $seeds = $l->getSeeds();
-
                 foreach($seeds as $s){
                     $s->getId();
                 }
-
             }
-
         }
-
-
-
-
-        /*##                             ##*/
-        /*#################################*/
-
-
-        $memoryUsage = memory_get_usage(true) - $memoryBu;
-        $time        = microtime(true) - $timeBu;
     }
-
-
-    
-    
 }

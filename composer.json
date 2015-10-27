@@ -1,10 +1,12 @@
 {
     "require": {
-        "doctrine/orm": "2.4.x",
 
+        "doctrine/orm": "2.5.1",
         "sneakybobito/phalcon-stubs": "1.2.0",
         "j4mie/idiorm": "v1.5.1",
-        "propel/propel": "2.0.0-alpha4"
+        "propel/propel": "2.0.0-alpha4",
+        "lavoiesl/php-benchmark": "^1.4",
+        "fzaninotto/faker": "^1.5"
 
 
     },

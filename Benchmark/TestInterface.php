@@ -7,14 +7,15 @@ namespace Benchmark;
  * @author bobito
  */
 interface TestInterface {
-    
-    public function launchSimple($dbInfo,&$memoryUsage,&$time);
-    
-    public function launchOneJoin($dbInfo,&$memoryUsage,&$time);
-    
-    public function launchTwoJoin($dbInfo,&$memoryUsage,&$time);
-    
-    
-}
 
-?>
+    public function __construct($dbInfos);
+
+    public function launchSimple();
+    
+    public function launchOneJoin();
+    
+    public function launchTwoJoin();
+    
+    public function getName();
+
+}
