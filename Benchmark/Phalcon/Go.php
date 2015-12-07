@@ -2,6 +2,9 @@
 
 namespace Benchmark\Phalcon;
 
+use Benchmark\Phalcon\Models\Lemon;
+use Benchmark\Phalcon\Models\Tree;
+
 class Go implements \Benchmark\TestInterface{
 
     protected $di;
@@ -39,13 +42,25 @@ class Go implements \Benchmark\TestInterface{
         $di = $this->di;
         $manager = $di->get('modelsManager');
 
-        $phql  = "SELECT * FROM Benchmark\Phalcon\Models\Tree LEFT JOIN Benchmark\Phalcon\Models\Lemon ON Benchmark\Phalcon\Models\Tree.id = Benchmark\Phalcon\Models\Lemon.tree_id";
-        $trees = $manager->executeQuery($phql);
+        $phql  = "SELECT t.*, l.* FROM Benchmark\Phalcon\Models\Tree t LEFT JOIN Benchmark\Phalcon\Models\Lemon l";
+        $rows = $manager->executeQuery($phql);
 
-        foreach($trees as $t){
-            foreach($t["benchmark\Phalcon\Models\Tree"]->lemons as $lemon){
-                $lemon->id;
-            }
+        $trees=array();
+
+        foreach($rows as $row){
+
+            // The following code will mimic the entity hydration
+//            if(!isset( $trees[$row["t"]->id])){
+//                $t = new Tree();
+//                $t->age = $row["t"]->age;
+//                $t->id  = $row["t"]->id;
+//                $trees[$row["t"]->id]=$t;
+//            }
+//            $l = new Lemon();
+//            $l->id = $row["l"]->id;
+//            $l->mature = $row["l"]->mature;
+//            $l->tree = $trees[$row["t"]->id];
+//            $trees[$row["t"]->id]->lemons[] = $l;
         }
 
     }

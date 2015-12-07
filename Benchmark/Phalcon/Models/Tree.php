@@ -18,6 +18,8 @@ class Tree extends \Phalcon\Mvc\Model
      */
     public $age;
 
+    public $lemons = [];
+
     public function initialize(){
         $this->hasMany("id", "Benchmark\Phalcon\Models\Lemon", "tree_id", ["alias" => "lemons"]);
         $this->hasMany("id", "Benchmark\Phalcon\Models\Leaf", "tree_id");
